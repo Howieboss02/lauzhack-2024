@@ -8,34 +8,43 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
                 if (chrome.runtime.lastError) {
                     console.error("Error injecting content script:", chrome.runtime.lastError.message);
-                    const headingsList = document.getElementById("headings");
-                    const listItem = document.createElement("li");
-                    listItem.textContent = "Could not inject script. The page may restrict access.";
-                    headingsList.appendChild(listItem);
+                    const headingContent = document.getElementById("headingContent");
+                    headingContent.textContent = "Could not inject script. The page may restrict access.";
+
+                    const articleContent = document.getElementById("articleContent");
+                    articleContent.textContent = "Could not inject script. The page may restrict access.";
                     return;
                 }
 
                 // Send a message to the content script
-                chrome.tabs.sendMessage(tabs[0].id, { action: "getHeadings" }, (response) => {
-                    const headingsList = document.getElementById("headings");
+                chrome.tabs.sendMessage(tabs[0].id, { action: "getHeading and Article" }, (response) => {
+                    const headingContent = document.getElementById("headingContent");
+                    headingContent.textContent = "Could not inject script. The page may restrict access.";
+
+                    const articleContent = document.getElementById("articleContent");
+                    articleContent.textContent = "Could not inject script. The page may restrict access.";
 
                     if (chrome.runtime.lastError) {
                         console.error("Error communicating with content script:", chrome.runtime.lastError.message);
-                        const listItem = document.createElement("li");
-                        listItem.textContent = "Unable to extract headings. The page may restrict access.";
-                        headingsList.appendChild(listItem);
+                        const headingContent = document.getElementById("headingContent");
+                        headingContent.textContent = "Could not inject script. The page may restrict access.";
+
+                        const articleContent = document.getElementById("articleContent");
+                        articleContent.textContent = "Could not inject script. The page may restrict access.";
                         return;
                     }
 
                     if (response && response.headings && response.headings.length > 0) {
                         response.headings.forEach((heading) => {
-                            const listItem = document.createElement("li");
-                            listItem.textContent = heading;
-                            headingsList.appendChild(listItem);
+                            const headingContent = document.getElementById("headingContent");
+                            headingContent.textContent = "Could not inject script. The page may restrict access.";
+
+                            const articleContent = document.getElementById("articleContent");
+                            articleContent.textContent = "Could not inject script. The page may restrict access.";
                         });
                     } else {
                         const listItem = document.createElement("li");
-                        listItem.textContent = "No headings found on this page.";
+                        listItem.textContent = "No Content found on this page.";
                         headingsList.appendChild(listItem);
                     }
                 });

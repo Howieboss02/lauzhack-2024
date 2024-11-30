@@ -1,19 +1,20 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "getHeadings") {
         try {
-            const headings = [];
-            document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((heading) => {
-                headings.push(`${heading.tagName}: ${heading.textContent.trim()}`);
-            });
+            const heading = document.querySelector("h1");
+            const headingContent = heading ? heading.textContent.trim() : "No heading content found.";
+            const article = document.querySelector("div.article-body__content");
+            const articleContent = article ? article.textContent.trim() : "No article content found.";
 
-            // Log the found headings for debugging
-            console.log("Extracted Headings:", headings);
+            // Log the extracted data for debugging
+            console.log("Extracted Heading:", headingContent);
+            console.log("Extracted Article Content:", articleContent);
 
             // Send the response back to popup.js
-            sendResponse({ headings });
+            sendResponse({ heading: headingContent, text: articleContent });
         } catch (error) {
-            console.error("Error extracting headings:", error);
-            sendResponse({ headings: [] });
+            console.error("Error extracting content:", error);
+            sendResponse({ error: "Failed to extract content. See console for details." });
         }
     }
 
