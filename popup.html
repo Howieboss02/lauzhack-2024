@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scraper</title>
+  </head>
+  <body>
+    <button id="scrape">Scrape Page</button>
+    <ul id="results"></ul>
+    <script>
+      document.getElementById("scrape").addEventListener("click", () => {
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+          chrome.scripting.executeScript(
+            {
+              target: { tabId: tabs[0].id },
+              func: scrapePage
+            },
+            (result) => {
+              const ul = document.getElementById("results");
+              ul.innerHTML = result[0].result.map(text => `<li>${text}</li>`).join("");
+            }
+          );
+        });
+      });
+
+      function scrapePage() {
+        return Array.from(document.querySelectorAll("h1")).map(el => el.textContent);
+      }
+    </script>
+  </body>
+</html>
