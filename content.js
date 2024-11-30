@@ -41,6 +41,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 const headingContent = document.querySelector("h1")?.textContent.trim() || "No heading content found.";
                 const articleContent = document.querySelector("div.entry-content.article-content")?.textContent.trim() || "No article content found.";
                 divContent = `${headingContent}\n\n${articleContent}`;
+                // sent div contentn to loclalhost:5000
+            
             }
             else {
                 divContent = `Content extraction is not configured for the host: ${hostName}`;
@@ -48,6 +50,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
             // Send the content back to popup.js
             sendResponse({ text: divContent });
+            // Send divContent to app.py
+            const content = fetch('http://localhost:5000/get_content', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ divContent }),
+            });
+
+            console.log("Div content extracted:", content);
+
         } catch (error) {
             console.error("Error extracting div content:", error);
             sendResponse({ text: "Error extracting content." });
