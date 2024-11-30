@@ -1,11 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Heading Extractor",
+  "name": "Fact Checker",
   "version": "1.0",
-  "description": "Extracts and displays headings from the current webpage.",
-  "permissions": ["activeTab", "scripting"],
+  "description": "This extension checks the facts of the news articles.",
+  "permissions": ["activeTab", "scripting","sidePanel"],
   "host_permissions": ["<all_urls>"],
-  "action": {
-    "default_popup": "popup.html"
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "panel.html"
   }
 }
