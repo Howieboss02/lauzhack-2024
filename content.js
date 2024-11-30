@@ -1,14 +1,22 @@
-// Content script to scrape all <h1> tags
-console.log("Content script is running...");
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === "getHeadings") {
+        try {
+            const headings = [];
+            document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((heading) => {
+                headings.push(`${heading.tagName}: ${heading.textContent.trim()}`);
+            });
 
-// Get all <h1> elements on the page
-const headers = document.querySelectorAll("h1");
+            // Log the found headings for debugging
+            console.log("Extracted Headings:", headings);
 
-// Extract the text content of each <h1>
-const headerTexts = Array.from(headers).map(header => header.textContent);
+            // Send the response back to popup.js
+            sendResponse({ headings });
+        } catch (error) {
+            console.error("Error extracting headings:", error);
+            sendResponse({ headings: [] });
+        }
+    }
 
-// Log the extracted text
-console.log("Scraped H1 Elements:", headerTexts);
-
-// Send the data back to the background script or do further processing
-chrome.runtime.sendMessage({ type: "SCRAPED_DATA", data: headerTexts });
+    // Important: Return true to indicate asynchronous response
+    return true;
+});

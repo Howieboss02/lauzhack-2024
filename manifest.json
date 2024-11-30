@@ -1,15 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Web Scraper",
+  "name": "Heading Extractor",
   "version": "1.0",
-  "description": "A simple web scraper extension",
+  "description": "Extracts and displays headings from the current webpage.",
   "permissions": ["activeTab", "scripting"],
   "host_permissions": ["<all_urls>"],
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
+    "default_popup": "popup.html"
   }
 }
