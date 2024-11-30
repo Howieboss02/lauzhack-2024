@@ -1,23 +1,16 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.action === "getHeadings") {
+    if (message.action === "getDivContent") {
         try {
-            const heading = document.querySelector("h1");
-            const headingContent = heading ? heading.textContent.trim() : "No heading content found.";
-            const article = document.querySelector("div.article-body__content");
-            const articleContent = article ? article.textContent.trim() : "No article content found.";
+            // Select the div element with the class 'css-146c3p1' or other attributes
+            const div = document.querySelector('div.css-146c3p1[data-testid="tweetText"]');
+            const divContent = div ? div.textContent.trim() : "No twitter post found";
 
-            // Log the extracted data for debugging
-            console.log("Extracted Heading:", headingContent);
-            console.log("Extracted Article Content:", articleContent);
-
-            // Send the response back to popup.js
-            sendResponse({ heading: headingContent, text: articleContent });
+            // Send the content back to popup.js
+            sendResponse({ text: divContent });
         } catch (error) {
-            console.error("Error extracting content:", error);
-            sendResponse({ error: "Failed to extract content. See console for details." });
+            console.error("Error extracting div content:", error);
+            sendResponse({ text: "Error extracting content." });
         }
     }
-
-    // Important: Return true to indicate asynchronous response
-    return true;
+    return true; // Important for asynchronous responses
 });
