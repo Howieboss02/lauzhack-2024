@@ -1,6 +1,6 @@
 document.getElementById("scrape").addEventListener("click", () => {
-  chrome.runtime.sendMessage({ action: "startScraping" });
-});
+  chrome.runtime.sendMessage({ action: "startScraping" })
+})
 
 console.log("Element in setState:", element);
 if (!element) {
