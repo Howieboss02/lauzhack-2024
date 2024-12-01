@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-        if (fakeCoeff == 0) {
+        if (fakeCoeff == 1) {
             messageContainer.textContent = "Great! You are right!";
             messageContainer.style.color = "#28a745"; // Green for success
         } else {
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const sentimentText = document.getElementById("sentimentText");
 
 
-        if (fakeCoeff == 1) {
+        if (fakeCoeff == 0) {
             messageContainer.textContent = "Great! You are right!";
             messageContainer.style.color = "#28a745"; // Green for success
         } else {
