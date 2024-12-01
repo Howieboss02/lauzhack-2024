@@ -21,8 +21,11 @@
       </ul>
     </li>
     <li>
-      <a href="#Build With">Software</a>
-      <a href="#Getting-started">Getting Started</a>
+      <a href="#for-developers">For Developers</a>
+      <ul>
+      <li><a href="#build-with">Build With</a></li>
+      <li><a href="#getting-started">Getting Started</a></li>
+      </ul>
   </ol>
 </details>
 
@@ -35,6 +38,8 @@ The analysis is comprehensive and also impose a question if the news just read i
 ### Goal
 User friendly extension that can be a perosnal helper, while reviewing the news.
 
+## For Developers
+
 ### Build With
 
 * [![React][React.js]][React-url]
@@ -44,7 +49,7 @@ User friendly extension that can be a perosnal helper, while reviewing the news.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-### getting-started
+### Getting started
 
 
 #### Step 1: Create and Activate the Virtual Environment
@@ -99,19 +104,13 @@ set FLASK_ENV=development
 
 ---
 
-## Step 4: Deactivate the Virtual Environment
+##### Step 4: Deactivate the Virtual Environment
 ```bash
 # Deactivate the virtual environment
 deactivate
 ```
 
 ---
-
-### Software
-- Java Script
-- Python
-- Flask
-- Hugging-face models
 
 ### License
 Distributed under the MIT License. See `LICENSE.txt` for more information.
