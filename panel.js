@@ -7,25 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             () => {
                 chrome.tabs.sendMessage(tabs[0].id, { action: "getDivContent" }, (response) => {
+
                     const divDisplay = document.getElementById("divContent");
                     if (chrome.runtime.lastError) {
                         console.error("Error communicating with content script:", chrome.runtime.lastError.message);
                         divDisplay.textContent = "Unable to extract content. The page may restrict access.";
                         return;
                     }
-                    divDisplay.textContent = getFakeCoefficient().then(result => result.data);
+                    if (response && response.success) {
+                        divDisplay.textContent = response.content;
+                    } else {
+                        divDisplay.textContent = response ? response.content : "Failed to retrieve content.";
+                    }
                 });
             }
         );
     });
 
-    // Get the value from app.py - endpoint send-text
-    const newsValue = fetch('http://127.0.0.1:5000/send-text', {
+    const fakeValue = fetch('http://127.0.0.1:5000/send_text', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ text: divDisplay.textContent }),
+        body: JSON.stringify({ text: document.getElementById("divContent").textContent }),
     })
         .then(response => response.json())
         .then(data => {
@@ -33,7 +37,70 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error('Error:', error));
 
-    console.log("our fake news:", newsValue);
+    console.log("Div content extracted:", fakeValue);
+
+    //
+    // const sentimentValue = fetch('http://127.0.0.1:5000/sent_sentiment', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ text: divContent}),
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log('Response from Flask:', data);
+    //     })
+    //     .catch(error => console.error('Error:', error));
+    //
+    // console.log("Div content extracted:", sentimentValue);
+    //
+    // const emotionValue = fetch('http://127.0.0.1:5000/sent_emotion', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ text: divContent}),
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log('Response from Flask:', data);
+    //     })
+    //     .catch(error => console.error('Error:', error));
+    //
+    // console.log("Div content extracted:", emotionValue);
+    //
+    // const hateSpeechValue = fetch('http://127.0.0.1:5000/sent_hate_speech', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ text: divContent}),
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log('Response from Flask:', data);
+    //     })
+    //     .catch(error => console.error('Error:', error));
+    //
+    // console.log("Div content extracted:", hateSpeechValue);
+    //
+    // const ironyValue = fetch('http://127.0.0.1:5000/sent_irony', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ text: divContent}),
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log('Response from Flask:', data);
+    //     })
+    //     .catch(error => console.error('Error:', error));
+    //
+    // console.log("Div content extracted:", ironyValue);
+
+
 
     // Add event listener for "No" button
     const noButton = document.getElementById("noButton");
@@ -45,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+        let newsValue = true;
         if (newsValue) {
             messageContainer.textContent = "Great! You are right!";
             messageContainer.style.color = "#28a745"; // Green for success

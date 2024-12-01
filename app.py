@@ -10,7 +10,7 @@ CORS(app)
 model, tokenizer = get_model()
 
 
-@app.route('/send-text', methods=['POST'])
+@app.route('/send_text', methods=['POST'])
 def send_text():
     data = request.get_json()
     print("Received data:", data)
