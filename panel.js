@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         divDisplay.textContent = "Unable to extract content. The page may restrict access.";
                         return;
                     }
-                    divDisplay.textContent = getFakeCoefficient() || "No content found for the specified element.";
+                    divDisplay.textContent = getFakeCoefficient().then(result => result.data);
                 });
             }
         );
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Get the value from app.py - endpoint send-text
     const newsValue = document.getElementById("getData").addEventListener("click", () => {
         // Send GET request to Flask
-        fetch('http://127.0.0.1:5000/get_data')
+        fetch('http://127.0.0.1:5000/send-text')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
