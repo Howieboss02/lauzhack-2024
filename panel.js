@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Get the value from app.py - endpoint send-text
-<<<<<<< HEAD
     const newsValue = fetch('http://127.0.0.1:5000/send-text', {
         method: 'POST',
         headers: {
@@ -33,19 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log('Response from Flask:', data);
         })
         .catch(error => console.error('Error:', error));
-=======
-    const newsValue = document.getElementById("getData").addEventListener("click", () => {
-        // Send GET request to Flask
-        fetch('http://127.0.0.1:5000/send-text')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json(); // Parse JSON response
-            })
-            .then(data => {
-                console.log('Data received from Flask:', data);
->>>>>>> 38db1064ac0f3664dfba268b90d5ecc91c6a6a12
 
     console.log("our fake news:", newsValue);
 

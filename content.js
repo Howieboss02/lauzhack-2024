@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             // Send the content back to popup.js
             sendResponse({ text: divContent });
             // Send divContent to app.py
-            const content = fetch('http://127.0.0.1:5000/send-text', {
+            const newsValue = fetch('http://127.0.0.1:5000/send-text', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,67 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 })
                 .catch(error => console.error('Error:', error));
 
-            console.log("Div content extracted:", content);
+            console.log("Div content extracted:", newsValue);
+
+            const sentimentValue = fetch('http://127.0.0.1:5000/sent_sentiment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: divContent}),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response from Flask:', data);
+                })
+                .catch(error => console.error('Error:', error));
+
+            console.log("Div content extracted:", sentimentValue);
+
+            const emotionValue = fetch('http://127.0.0.1:5000/sent_emotion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: divContent}),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response from Flask:', data);
+                })
+                .catch(error => console.error('Error:', error));
+
+            console.log("Div content extracted:", emotionValue);
+
+            const hateSpeechValue = fetch('http://127.0.0.1:5000/sent_hate_speech', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: divContent}),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response from Flask:', data);
+                })
+                .catch(error => console.error('Error:', error));
+
+            console.log("Div content extracted:", hateSpeechValue);
+
+            const ironyValue = fetch('http://127.0.0.1:5000/sent_irony', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: divContent}),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Response from Flask:', data);
+                })
+                .catch(error => console.error('Error:', error));
+
+            console.log("Div content extracted:", ironyValue);
 
         } catch (error) {
             console.error("Error extracting div content:", error);

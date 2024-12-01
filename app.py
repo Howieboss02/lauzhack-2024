@@ -9,9 +9,10 @@ CORS(app)
 
 model, tokenizer = get_model()
 
+
 @app.route('/send-text', methods=['POST'])
 def send_text():
-    data = request.get_json()['text']
+    data = request.get_json()
     print("Received data:", data)
 
     article = data['text']
@@ -21,9 +22,9 @@ def send_text():
 
 
 @app.route('/sent_sentiment', methods=['POST'])
-def sent_sentiment(data):
+def sent_sentiment():
 
-    data = request.get_json()['text']
+    data = request.get_json()
     if 'text' not in data:
         return jsonify({'error': 'No text provided'}), 400
     text = data['text']
@@ -31,7 +32,7 @@ def sent_sentiment(data):
     return jsonify(sentiment), 200
 
 @app.route('/sent_emotion', methods=['POST'])
-def sent_emotion(data):
+def sent_emotion():
     data = request.get_json()
 
     if 'text' not in data:
@@ -42,7 +43,7 @@ def sent_emotion(data):
 
 
 @app.route('/sent_hate_speech', methods=['POST'])
-def sent_hate_speech(data):
+def sent_hate_speech():
     data = request.get_json()
 
     if 'text' not in data:
@@ -52,7 +53,7 @@ def sent_hate_speech(data):
     return jsonify(hate_speech), 200
 
 @app.route('/sent_irony', methods=['POST'])
-def sent_irony(data):
+def sent_irony():
     data = request.get_json()
 
     if 'text' not in data:
