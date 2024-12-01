@@ -122,8 +122,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [license-url]: https://github.com/Howieboss02/lauzhack-2024/blob/main/LICENSE
 
 
-[React.js]: https://img.shields.io/badge/React-black?logo=react
-[React-url]: https://reactjs.org/
+[React.js]: https://img.shields.io/badge/JS-black?logo=javascript
+[React-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [Python.org]: https://img.shields.io/badge/Python-brightgreeen?style=flat&logo=python&logoColor=FFE873&color=306998
 [Python-url]: https://www.python.org/
 [Flask.com]: https://img.shields.io/badge/Flask-black?style=plastic&logo=flask&color=%2361dafb
