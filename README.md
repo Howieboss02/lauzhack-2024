@@ -32,11 +32,10 @@
 ## About The Project
 
 ### Motivation
-We wanted to create an extension to the browser which allows users to get the summary of the news they read and twitter post they scroll through. 
-The analysis is comprehensive and also impose a question if the news just read is a fakenews or not, to enforce the realisation how often the user encounters the fakenews.
+Our goal was to develop a browser extension that empowers users by providing concise summaries of the news they read and the Twitter posts they browse. This extension goes beyond simple summarization by offering a comprehensive analysis, prompting users to critically evaluate the credibility of the content they consume. By asking whether the news might be fake, the extension raises awareness and encourages users to reflect on how often they may encounter misinformation or fake news.
 
-### Goal
-User friendly extension that can be a perosnal helper, while reviewing the news.
+### Goal  
+To create a user-friendly browser extension that acts as a personal assistant for analyzing online content. The extension performs comprehensive analyses, including hate speech detection, emotion recognition, sentiment analysis, fake news verification, and irony detection, helping users critically evaluate the news and social media posts they consume.
 
 ## For Developers
 
@@ -117,7 +116,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-4
+[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-4-brightyellow?style=for-the-badge
 [contributors-url]:https://github.com/Howieboss02/lauzhack-2024/graphs/contributors
 [license-shield]: https://img.shields.io/badge/LICENSE-MIT-brightyellow?style=for-the-badge
 [license-url]: https://github.com/Howieboss02/lauzhack-2024/blob/main/LICENSE
