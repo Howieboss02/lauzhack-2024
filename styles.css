@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    width: 300px;
+}
+
+h1 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+#question {
+    margin-top: 20px;
+}
+
+
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#yesButton {
+    background-color: #28a745;
+}
+
+#yesButton:hover {
+    background-color: #1e7e34;
+}
+
+#noButton {
+    background-color: #dc3545;
+}
+
+#noButton:hover {
+    background-color: #c82333;
+}
+
+#sentimentSliders {
+    margin-top: 20px;
+}
+
+.slider-container {
+    margin: 10px 0;
+}
+
+.slider-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.slider-value {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 100%;
+}

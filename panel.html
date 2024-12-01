@@ -3,20 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Checking</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 10px;
-            width: 300px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <title>Fact Checker</title>
 </head>
 <body>
     <div id="content">
-        <h2>Twitter Post Content</h2>
+        <h1>News Analysis</h1>
         <p id="divContent">Loading...</p>
+        <div id="question">
+            <span>Fake news?</span>
+            <div id="buttons">
+                <button id="yesButton">Y</button>
+                <button id="noButton">N</button>
+            </div>
+        </div>
+        <div id="messageContainer" style="margin-top: 20px; font-weight: bold;"></div>
+        <div id="sentimentContainer" style="display: none; margin-top: 20px;">
+            <p id="sentimentText" style="font-weight: bold; color: #444;"></p>
+            <div id="sentimentSliders">
+                <div class="slider-container">
+                    <div class="slider-label">Neutral<span class="slider-value" id="neutralValue">60</span>%</div>
+                    <input type="range" id="neutralSlider" min="0" max="100" value="60" disabled>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-label">Negative<span class="slider-value" id="negativeValue">40</span>%</div>
+                    <input type="range" id="negativeSlider" min="0" max="100" value="40" disabled>
+                </div>
+                <div class="slider-container">
+                    <div class="slider-label">Positive<span class="slider-value" id="positiveValue">70</span>%</div>
+                    <input type="range" id="positiveSlider" min="0" max="100" value="70" disabled>
+                </div>
+            </div>
+        </div>
+        
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="panel.js"></script>
 </body>
 </html>
+

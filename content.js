@@ -9,15 +9,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
             // Handle Twitter case
             if (hostName === "x.com") {
-                //const div = document.querySelector('div.css-1dbjc4n[data-testid="tweet"]');
                 const div = document.querySelector('div[data-testid^="tweet"]');
-                divContent = div ? div.textContent.trim() : "No Twitter post found.";
+                divContent = div ? `${div.textContent.trim()} \n\nFake news?` : "No Twitter post found.";
             }
             // Handle NBC News case
             else if (hostName === "www.nbcnews.com") {
                 const headingContent = document.querySelector("h1")?.textContent.trim() || "No heading content found.";
-                const articleContent = document.querySelector("div.article-body__content")?.textContent.trim() || "No article content found.";
-                divContent = `${headingContent}\n\n${articleContent}`;
+                divContent = `Title: ${headingContent} \n\nFake news?`;
             } 
             else if (hostName === "edition.cnn.com") {
                 console.log("Processing content for CNN.");
@@ -25,22 +23,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 // Extract the headline
                 const headingContent = document.querySelector("h1")?.textContent.trim() || "No heading content found.";
 
-                // Extract the article body
-                //const articleBodyElements = document.querySelectorAll(".article__content .Paragraph__component, .l-container .zn-body__paragraph, article .Article__content p");
-                const articleBodyElements = document.querySelectorAll("div.article__content");
-                let articleContent = "";
-
-                articleBodyElements.forEach(paragraph => {
-                    articleContent += paragraph.textContent.trim() + "\n\n";
-                });
-
-                articleContent = articleContent.trim() || "No article content found.";
-                divContent = `${headingContent}\n\n${articleContent}`;
+                divContent = `Title: ${headingContent} \n\nFake news?`;
             }
             else if (hostName === "www.toronto99.com") {
                 const headingContent = document.querySelector("h1")?.textContent.trim() || "No heading content found.";
-                const articleContent = document.querySelector("div.entry-content.article-content")?.textContent.trim() || "No article content found.";
-                divContent = `${headingContent}\n\n${articleContent}`;
+                divContent = `Title: ${headingContent} \n\nFake news?`;
             }
             else {
                 divContent = `Content extraction is not configured for the host: ${hostName}`;

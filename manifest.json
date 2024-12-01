@@ -3,12 +3,15 @@
   "name": "Fact Checker",
   "version": "1.0",
   "description": "This extension checks the facts of the news articles.",
-  "permissions": ["activeTab", "scripting","sidePanel"],
+  "permissions": ["activeTab", "scripting", "sidePanel"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
   },
   "side_panel": {
     "default_path": "panel.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
   }
 }
