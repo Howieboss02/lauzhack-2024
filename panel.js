@@ -240,11 +240,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Call the function initially to set the values when the page loads
         updateSliderValues();
-
 // Add event listeners to update the values when the user moves the sliders
         document.getElementById("aggressiveSlider").addEventListener("input", updateSliderValues);
         document.getElementById("hatefulSlider").addEventListener("input", updateSliderValues);
         document.getElementById("targetedSlider").addEventListener("input", updateSliderValues)
+
     });
 
     // Add event listener for "Yes" button
