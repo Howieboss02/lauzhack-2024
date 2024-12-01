@@ -181,6 +181,43 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("targetedSlider").value = sentimentData.targeted;
 
         
+
+        // Emotions data
+
+        emotionsText.textContent = "Emotions Analysis";
+        emotionsContainer.style.display = "block";
+
+        // Static sentiment data
+
+
+        const emotionsData = {
+            anger: 0.798, surprise: 0.055, fear: 0.040, disgust: 0.036, joy: 0.028, others: 0.023, sadness: 0.019
+        };
+
+        console.log("Sentiment Data:", emotionsData);
+
+        // Update slider values dynamically
+        document.getElementById("angerValue").textContent = emotionsData.anger;
+        document.getElementById("angerSlider").value = emotionsData.anger;
+
+        document.getElementById("surpriseValue").textContent = emotionsData.surprise;
+        document.getElementById("surpriseSlider").value = emotionsData.surprise;
+
+        document.getElementById("fearValue").textContent = emotionsData.fear;
+        document.getElementById("fearSlider").value = emotionsData.fear;
+
+        document.getElementById("disgustValue").textContent = emotionsData.disgust;
+        document.getElementById("disgustSlider").value = emotionsData.disgust;
+        
+        document.getElementById("joyValue").textContent = emotionsData.joy;
+        document.getElementById("joySlider").value = emotionsData.joy;
+        
+        document.getElementById("othersValue").textContent = emotionsData.others;
+        document.getElementById("othersSlider").value = emotionsData.others;
+        
+        document.getElementById("sadnessValue").textContent = emotionsData.sadness;
+        document.getElementById("sadnessSlider").value = emotionsData.sadness;
+
         noButton.disabled = true;
         document.getElementById("yesButton").disabled = true;
 
@@ -249,6 +286,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("targetedValue").textContent = sentimentData.targeted;
         document.getElementById("targetedSlider").value = sentimentData.targeted;
+
+
+        // Emotions data
+
+        emotionsText.textContent = "Emotions Analysis";
+        emotionsContainer.style.display = "block";
+
+        // Static sentiment data
+
+
+        const emotionsData = {
+            anger: 0.798, surprise: 0.055, fear: 0.040, disgust: 0.036, joy: 0.028, others: 0.023, sadness: 0.019
+        };
+
+        console.log("Sentiment Data:", emotionsData);
+
+        // Update slider values dynamically
+        document.getElementById("angerValue").textContent = emotionsData.anger;
+        document.getElementById("angerSlider").value = emotionsData.anger;
+
+        document.getElementById("surpriseValue").textContent = emotionsData.surprise;
+        document.getElementById("surpriseSlider").value = emotionsData.surprise;
+
+        document.getElementById("fearValue").textContent = emotionsData.fear;
+        document.getElementById("fearSlider").value = emotionsData.fear;
+
+        document.getElementById("disgustValue").textContent = emotionsData.disgust;
+        document.getElementById("disgustSlider").value = emotionsData.disgust;
+        
+        document.getElementById("joyValue").textContent = emotionsData.joy;
+        document.getElementById("joySlider").value = emotionsData.joy;
+        
+        document.getElementById("othersValue").textContent = emotionsData.others;
+        document.getElementById("othersSlider").value = emotionsData.others;
+        
+        document.getElementById("sadnessValue").textContent = emotionsData.sadness;
+        document.getElementById("sadnessSlider").value = emotionsData.sadness;
+
+
 
         yesButton.disabled = true;
         document.getElementById("noButton").disabled = true;
