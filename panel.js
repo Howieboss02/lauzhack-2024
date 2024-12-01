@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         divDisplay.textContent = "Unable to extract content. The page may restrict access.";
                         return;
                     }
-                    divDisplay.textContent = response.text || "No content found for the specified element.";
+                    divDisplay.textContent = getFakeCoefficient() || "No content found for the specified element.";
                 });
             }
         );
@@ -67,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
         sentimentContainer.style.display = "block";
 
         // Static sentiment data
+
+
         const sentimentData = {
             neutral: 60,
             negative: 40,

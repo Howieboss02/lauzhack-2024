@@ -12,32 +12,11 @@ def send_text():
     print("Received data:", data)
     return jsonify({'message': 'Data received', 'received': data})
 
-# Endpoint for handling text input
-@app.route('/get_content', methods=['GET'])
-def receive_content():
-    # Get JSON data from the request
-    # Get 
-    data = request.get_json()
-    # print in server console
-    
-    
-    # Check if 'text' is in the JSON payload
-    if 'text' not in data:
-        return jsonify({'error': 'No text provided'}), 400
-    
-    text = data['text']
-    
-    # Process the text (for now, we'll just echo it back)
-    response = {
-        'original_text': text,
-        'message': f'Received text: {text}'
-    }
-    return jsonify(response), 200
 
 @app.route('/sent_sentiment', methods=['POST'])
 def sent_sentiment(data):
 
-    sentiment = get_sentiment(data)
+    #sentiment = get_sentiment(data)
     data = request.get_json()
     if 'text' not in data:
         return jsonify({'error': 'No text provided'}), 400
@@ -50,7 +29,7 @@ def sent_sentiment(data):
 
 @app.route('/sent_emotion', methods=['POST'])
 def sent_emotion(data):
-    emotion = get_emotion(data)
+    #emotion = get_emotion(data)
     data = request.get_json()
 
     if 'text' not in data:
