@@ -13,37 +13,55 @@ document.addEventListener("DOMContentLoaded", () => {
                         divDisplay.textContent = "Unable to extract content. The page may restrict access.";
                         return;
                     }
-                    divDisplay.textContent = response.text || "No content found for the specified element.";
+                    divDisplay.textContent = getFakeCoefficient() || "No content found for the specified element.";
                 });
             }
         );
     });
 
-    async function sendContent(divContent) {
-        try {
-            const response = await fetch('http://localhost:5000/send-text', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ divContent }),
-            });
-
-            // if (!response.ok) {
-            //     throw new Error(HTTP error! status: ${response.status});
-            // }
-
-            const content = await response.json();
-            console.log("tu jestem ")
-            console.log("Div content extracted:", content);
-        } catch (error) {
-            console.error("Error extracting div content:", error);
-        }
+    const getFakeCoefficient = async () => {
+        const response = await fetch('http://localhost:5000/send-text', {
+          method: 'POST',
+          body: {
+            "text_input": divContent
+          },
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const myJson = await response.json(); //extract JSON from the http response
+        // extract the fake coefficient from the response
+        return "fake coeff " + myJson.fake_coefficient + "\n" + myJson.original_text;
     }
 
-// Example usage
-    sendContent(divContent);
+//     async function sendContent(divContent) {
+//         try {
+//             const response = await fetch('http://localhost:5000/send-text', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify({ divContent }),
+//             });
 
+//             // if (!response.ok) {
+//             //     throw new Error(HTTP error! status: ${response.status});
+//             // }
+
+//             const content = await response.json();
+//             console.log("tu jestem ")
+//             console.log("Div content extracted:", content);
+//         } catch (error) {
+//             console.error("Error extracting div content:", error);
+//         }
+//     }
+
+// // Example usage
+//     sendContent(divContent);
+
+
+
+    // 
 
 
     const newsValue = false;
