@@ -19,7 +19,33 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    
+    async function sendContent(divContent) {
+        try {
+            const response = await fetch('http://localhost:5000/send-text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ divContent }),
+            });
+
+            // if (!response.ok) {
+            //     throw new Error(HTTP error! status: ${response.status});
+            // }
+
+            const content = await response.json();
+            console.log("tu jestem ")
+            console.log("Div content extracted:", content);
+        } catch (error) {
+            console.error("Error extracting div content:", error);
+        }
+    }
+
+// Example usage
+    sendContent(divContent);
+
+
+
     const newsValue = false;
 
 
@@ -47,6 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
         sentimentContainer.style.display = "block";
 
         // Static sentiment data
+
+
         const sentimentData = {
             neutral: 60,
             negative: 40,
