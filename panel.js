@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (response && response.success) {
                         divDisplay.textContent = response.content;
                         articleContent = response.content;
-                        console.log("jazda mamy to \n " + articleContent);
+                        console.log(articleContent);
                     } else {
                         divDisplay.textContent = response ? response.content : "Failed to retrieve content.";
                     }
@@ -28,6 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     let fakeCoeff = false;
+    let hate_speech_aggressive = null;
+    let hate_speech_hateful = null;
+    let hate_speech_targeted = null;
+
 
     setTimeout(() => {
         const fakeValue = fetch('http://127.0.0.1:5000/send_text', {
@@ -48,6 +52,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log("Div content extraction request sent.");
     }, 1000); // 
+
+    setTimeout(() => {
+        const hateValue = fetch('http://127.0.0.1:5000/sent_hate_speech', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: articleContent }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from Flask:', data);
+                hate_speech_hateful = data["hateful"]
+                hate_speech_aggressive = data["aggressive"]
+                hate_speech_targeted = data["targeted"]
+            })
+            .catch(error => console.error('Error:', error));
+
+        console.log("Div content extraction request sent.");
+    }, 1000); //
 
 
     //
@@ -132,33 +156,58 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
 
-        sentimentText.textContent = "Sentiment Analysis";
+        sentimentText.textContent = "Hate Speech Analysis";
         sentimentContainer.style.display = "block";
 
         // Static sentiment data
 
 
         const sentimentData = {
-            neutral: 60,
-            negative: 40,
-            positive: 70,
+            aggressive: hate_speech_aggressive * 100,
+            hateful: hate_speech_hateful * 100,
+            targeted: hate_speech_targeted * 100
         };
 
         console.log("Sentiment Data:", sentimentData);
 
         // Update slider values dynamically
-        document.getElementById("neutralValue").textContent = sentimentData.neutral;
-        document.getElementById("neutralSlider").value = sentimentData.neutral;
+        document.getElementById("aggressiveValue").textContent = sentimentData.aggressive;
+        document.getElementById("aggressiveSlider").value = sentimentData.aggressive;
 
-        document.getElementById("negativeValue").textContent = sentimentData.negative;
-        document.getElementById("negativeSlider").value = sentimentData.negative;
+        document.getElementById("hatefulValue").textContent = sentimentData.hateful;
+        document.getElementById("hatefulSlider").value = sentimentData.hateful;
 
-        document.getElementById("positiveValue").textContent = sentimentData.positive;
-        document.getElementById("positiveSlider").value = sentimentData.positive;
+        document.getElementById("targetedValue").textContent = sentimentData.targeted;
+        document.getElementById("targetedSlider").value = sentimentData.targeted;
 
         
         noButton.disabled = true;
         document.getElementById("yesButton").disabled = true;
+
+        function updateSliderValues() {
+            // Get the current value of each slider
+            const aggressiveValue = document.getElementById("aggressiveSlider").value;
+            const hatefulValue = document.getElementById("hatefulSlider").value;
+            const targetedValue = document.getElementById("targetedSlider").value;
+
+            // Update the text content of the span elements to show the slider values
+            document.getElementById("aggressiveValue").textContent = aggressiveValue + '%';
+            document.getElementById("hatefulValue").textContent = hatefulValue + '%';
+            document.getElementById("targetedValue").textContent = targetedValue + '%';
+
+            // Optionally, log the updated values to the console
+            console.log("Updated Aggressive Value: " + aggressiveValue + '%');
+            console.log("Updated Hateful Value: " + hatefulValue + '%');
+            console.log("Updated Targeted Value: " + targetedValue + '%');
+        }
+
+// Call the function initially to set the values when the page loads
+        updateSliderValues();
+
+// Add event listeners to update the values when the user moves the sliders
+        document.getElementById("aggressiveSlider").addEventListener("input", updateSliderValues);
+        document.getElementById("hatefulSlider").addEventListener("input", updateSliderValues);
+        document.getElementById("targetedSlider").addEventListener("input", updateSliderValues)
     });
 
     // Add event listener for "Yes" button
@@ -177,30 +226,58 @@ document.addEventListener("DOMContentLoaded", () => {
             messageContainer.style.color = "#dc3545"; // Red for warning
         }
 
-        // Show sentiment analysis text and container
-        sentimentText.textContent = "Sentiment Analysis";
+        sentimentText.textContent = "Hate Speech Analysis";
         sentimentContainer.style.display = "block";
 
         // Static sentiment data
+
+
         const sentimentData = {
-            neutral: 60,
-            negative: 40,
-            positive: 70,
+            aggressive: hate_speech_aggressive * 100,
+            hateful: hate_speech_hateful * 100,
+            targeted: hate_speech_targeted * 100
         };
 
         console.log("Sentiment Data:", sentimentData);
 
         // Update slider values dynamically
-        document.getElementById("neutralValue").textContent = sentimentData.neutral;
-        document.getElementById("neutralSlider").value = sentimentData.neutral;
+        document.getElementById("aggressiveValue").textContent = sentimentData.aggressive;
+        document.getElementById("aggressiveSlider").value = sentimentData.aggressive;
 
-        document.getElementById("negativeValue").textContent = sentimentData.negative;
-        document.getElementById("negativeSlider").value = sentimentData.negative;
+        document.getElementById("hatefulValue").textContent = sentimentData.hateful;
+        document.getElementById("hatefulSlider").value = sentimentData.hateful;
 
-        document.getElementById("positiveValue").textContent = sentimentData.positive;
-        document.getElementById("positiveSlider").value = sentimentData.positive;
+        document.getElementById("targetedValue").textContent = sentimentData.targeted;
+        document.getElementById("targetedSlider").value = sentimentData.targeted;
 
         yesButton.disabled = true;
         document.getElementById("noButton").disabled = true;
+
+        function updateSliderValues1() {
+            // Get the current value of each slider
+            const aggressiveValue = document.getElementById("aggressiveSlider").value;
+            const hatefulValue = document.getElementById("hatefulSlider").value;
+            const targetedValue = document.getElementById("targetedSlider").value;
+
+            // Update the text content of the span elements to show the slider values
+            document.getElementById("aggressiveValue").textContent = aggressiveValue;
+            document.getElementById("hatefulValue").textContent = hatefulValue;
+            document.getElementById("targetedValue").textContent = targetedValue;
+
+            // Optionally, log the updated values to the console
+            console.log("Updated Aggressive Value: " + aggressiveValue);
+            console.log("Updated Hateful Value: " + hatefulValue);
+            console.log("Updated Targeted Value: " + targetedValue);
+        }
+
+// Call the function initially to set the values when the page loads
+        updateSliderValues1();
+
+// Add event listeners to update the values when the user moves the sliders
+        document.getElementById("aggressiveSlider").addEventListener("input", updateSliderValues);
+        document.getElementById("hatefulSlider").addEventListener("input", updateSliderValues);
+        document.getElementById("targetedSlider").addEventListener("input", updateSliderValues)
     });
+
+
 });
