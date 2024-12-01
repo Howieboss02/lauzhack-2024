@@ -32,6 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let hate_speech_hateful = null;
     let hate_speech_targeted = null;
 
+    let anger = null;
+    let disgust = null;
+    let fear = null;
+    let joy = null;
+    let others = null;
+    let sadness = null;
+    let surprise = null;
+
 
     setTimeout(() => {
         const fakeValue = fetch('http://127.0.0.1:5000/send_text', {
@@ -74,22 +82,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000); //
 
 
-    //
-    // const sentimentValue = fetch('http://127.0.0.1:5000/sent_sentiment', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ text: divContent}),
-    // })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log('Response from Flask:', data);
-    //     })
-    //     .catch(error => console.error('Error:', error));
-    //
-    // console.log("Div content extracted:", sentimentValue);
-    //
+
+    setTimeout(() => {
+        const emotionValue = fetch('http://127.0.0.1:5000/sent_emotion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: articleContent }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from Flask:', data);
+                anger = data["anger"];
+                disgust = data["disgust"];
+                fear = data["fear"];
+                joy = data["joy"];
+                others = data["others"];
+                sadness = data["sadness"];
+                surprise = data["surprise"];
+            })
+            .catch(error => console.error('Error:', error));
+
+        console.log("Div content extraction request sent.");
+    }, 1000); //
+
     // const emotionValue = fetch('http://127.0.0.1:5000/sent_emotion', {
     //     method: 'POST',
     //     headers: {
@@ -191,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         const emotionsData = {
-            anger: 0.798, surprise: 0.055, fear: 0.040, disgust: 0.036, joy: 0.028, others: 0.023, sadness: 0.019
+            anger: anger * 100, surprise: surprise * 100, fear: fear * 100, disgust: disgust * 100, joy: joy * 100, others: others * 100, sadness: sadness * 100
         };
 
         console.log("Sentiment Data:", emotionsData);
@@ -238,13 +255,28 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Updated Targeted Value: " + targetedValue + '%');
         }
 
+        function updateEmotionSliders(emotionsData) {
+            // Iterate over each emotion in the emotionsData object
+            for (const emotion in emotionsData) {
+                // Construct the ID for the value span and slider
+                const valueElement = document.getElementById(emotion + "Value");
+                const sliderElement = document.getElementById(emotion + "Slider");
+
+                // Update the value display and slider value
+                if (valueElement && sliderElement) {
+                    valueElement.textContent = emotionsData[emotion] + '%';
+                    sliderElement.value = emotionsData[emotion];
+                }
+            }
+        }
+        updateEmotionSliders()
 // Call the function initially to set the values when the page loads
         updateSliderValues();
 
 // Add event listeners to update the values when the user moves the sliders
-        document.getElementById("aggressiveSlider").addEventListener("input", updateSliderValues);
-        document.getElementById("hatefulSlider").addEventListener("input", updateSliderValues);
-        document.getElementById("targetedSlider").addEventListener("input", updateSliderValues)
+//         document.getElementById("aggressiveSlider").addEventListener("input", updateSliderValues);
+//         document.getElementById("hatefulSlider").addEventListener("input", updateSliderValues);
+//         document.getElementById("targetedSlider").addEventListener("input", updateSliderValues)
     });
 
     // Add event listener for "Yes" button
@@ -296,8 +328,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Static sentiment data
 
 
+
         const emotionsData = {
-            anger: 0.798, surprise: 0.055, fear: 0.040, disgust: 0.036, joy: 0.028, others: 0.023, sadness: 0.019
+            anger: anger * 100, surprise: surprise * 100, fear: fear * 100, disgust: disgust * 100, joy: joy * 100, others: others * 100, sadness: sadness * 100
         };
 
         console.log("Sentiment Data:", emotionsData);
@@ -345,14 +378,29 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Updated Hateful Value: " + hatefulValue);
             console.log("Updated Targeted Value: " + targetedValue);
         }
+        function updateEmotionSliders1(emotionsData) {
+            // Iterate over each emotion in the emotionsData object
+            for (const emotion in emotionsData) {
+                // Construct the ID for the value span and slider
+                const valueElement = document.getElementById(emotion + "Value");
+                const sliderElement = document.getElementById(emotion + "Slider");
 
+                // Update the value display and slider value
+                if (valueElement && sliderElement) {
+                    valueElement.textContent = emotionsData[emotion] + '%';
+                    sliderElement.value = emotionsData[emotion];
+                }
+            }
+        }
+        updateEmotionSliders1()
+//
 // Call the function initially to set the values when the page loads
         updateSliderValues1();
 
 // Add event listeners to update the values when the user moves the sliders
-        document.getElementById("aggressiveSlider").addEventListener("input", updateSliderValues);
-        document.getElementById("hatefulSlider").addEventListener("input", updateSliderValues);
-        document.getElementById("targetedSlider").addEventListener("input", updateSliderValues)
+//         document.getElementById("aggressiveSlider").addEventListener("input", updateSliderValues);
+//         document.getElementById("hatefulSlider").addEventListener("input", updateSliderValues);
+//         document.getElementById("targetedSlider").addEventListener("input", updateSliderValues)
     });
 
 
