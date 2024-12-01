@@ -21,9 +21,9 @@
       </ul>
     </li>
     <li>
+      <a href="#Build With">Software</a>
       <a href="#Getting-started">Getting Started</a>
-      <a href="#software">Software</a>
-    </ol>
+  </ol>
 </details>
 
 ## About The Project
@@ -34,6 +34,14 @@ The analysis is comprehensive and also impose a question if the news just read i
 
 ### Goal
 User friendly extension that can be a perosnal helper, while reviewing the news.
+
+### Build With
+
+* [![React][React.js]][React-url]
+* [![Python][Python.org]][Python-url]
+* [![Flask][Flask.com]][Flask-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### getting-started
