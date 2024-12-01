@@ -19,9 +19,29 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    
-    const newsValue = false;
+    // Get the value from app.py - endpoint send-text
+    const newsValue = document.getElementById("getData").addEventListener("click", () => {
+        // Send GET request to Flask
+        fetch('http://127.0.0.1:5000/get_data')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Parse JSON response
+            })
+            .then(data => {
+                console.log('Data received from Flask:', data);
 
+                // Display data in the DOM
+                document.getElementById('response').innerText = `
+                    Message: ${data.message},
+                    Status: ${data.status}
+                `;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
 
     // Add event listener for "No" button
     const noButton = document.getElementById("noButton");
