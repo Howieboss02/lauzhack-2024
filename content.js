@@ -35,6 +35,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
             // Send the content back to popup.js
             sendResponse({ text: divContent });
+            // Send divContent to app.py
+            const content = fetch('http://localhost:5000/get_content', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ divContent }),
+            });
+
+            console.log("Div content extracted:", content);
+
         } catch (error) {
             console.error("Error extracting div content:", error);
             sendResponse({ text: "Error extracting content." });
