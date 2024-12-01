@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             // Handle NBC News case
             else if (hostName === "www.nbcnews.com") {
                 const headingContent = document.querySelector("h1")?.textContent.trim() || "No heading content found.";
-                divContent = `Title: ${headingContent} \n\nFake news?`;
+                divContent = `Title: ${headingContent}`;
             } 
             else if (hostName === "edition.cnn.com") {
                 console.log("Processing content for CNN.");
@@ -23,11 +23,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 // Extract the headline
                 const headingContent = document.querySelector("h1")?.textContent.trim() || "No heading content found.";
 
-                divContent = `Title: ${headingContent} \n\nFake news?`;
+                divContent = `Title: ${headingContent}`;
             }
             else if (hostName === "www.toronto99.com") {
                 const headingContent = document.querySelector("h1")?.textContent.trim() || "No heading content found.";
-                divContent = `Title: ${headingContent} \n\nFake news?`;
+                divContent = `Title: ${headingContent}`;
             }
             else {
                 divContent = `Content extraction is not configured for the host: ${hostName}`;
@@ -35,27 +35,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
             // Send the content back to popup.js
             sendResponse({ success: true, content: divContent });
-
-
-
-
-            // document.getElementById("divContent").textContent = divContent;
-            // Send divContent to app.py
-            // const newsValue = fetch('http://127.0.0.1:5000/send-text', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({ text: divContent}),
-            // })
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         console.log('Response from Flask:', data);
-            //     })
-            //     .catch(error => console.error('Error:', error));
-
-            // console.log("Div content extracted:", newsValue);
-
 
 
         } catch (error) {

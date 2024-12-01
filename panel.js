@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    let articleContent = "";
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript(
             {
@@ -16,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     if (response && response.success) {
                         divDisplay.textContent = response.content;
+                        articleContent = response.content;
+                        console.log("jazda mamy to \n " + articleContent);
                     } else {
                         divDisplay.textContent = response ? response.content : "Failed to retrieve content.";
                     }
@@ -24,20 +27,48 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    const fakeValue = fetch('http://127.0.0.1:5000/send_text', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: document.getElementById("divContent").textContent }),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Response from Flask:', data);
-        })
-        .catch(error => console.error('Error:', error));
+    let fakeCoeff = false;
 
-    console.log("Div content extracted:", fakeValue);
+/*
+    setTimeout(() => {
+        const fakeValue = fetch('http://127.0.0.1:5000/send_text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: articleContent }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from Flask:', data);
+            })
+            .catch(error => console.error('Error:', error));
+
+        console.log("Div content extraction request sent.");
+    }, 3000); // 3000 milliseconds = 3 seconds
+*/
+
+    setTimeout(async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:5000/send_text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: articleContent }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json(); // Await JSON parsing
+            console.log('JSON data received:', data);
+            // Use the `data` object here
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }, 3000);
 
     //
     // const sentimentValue = fetch('http://127.0.0.1:5000/sent_sentiment', {
