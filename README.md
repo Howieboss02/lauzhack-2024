@@ -117,10 +117,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-6-brightgreen?style=for-the-badge 
-[contributors-url]: https://github.com/epfl-cs358/2024sp-exoskeleton/graphs/contributors
+[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-4
+[contributors-url]:https://github.com/Howieboss02/lauzhack-2024/graphs/contributors
 [license-shield]: https://img.shields.io/badge/LICENSE-MIT-brightyellow?style=for-the-badge
-[license-url]: https://github.com/epfl-cs358/2024sp-exoskeleton/blob/main/LICENSE
+[license-url]: https://github.com/Howieboss02/lauzhack-2024/blob/main/LICENSE
 
 
 [React.js]: https://img.shields.io/badge/React-black?logo=react
