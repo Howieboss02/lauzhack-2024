@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             // Handle Twitter case
             if (hostName === "x.com") {
                 const div = document.querySelector('div[data-testid^="tweet"]');
-                divContent = div ? `${div.textContent.trim()} \n\nFake news?` : "No Twitter post found.";
+                divContent = div ? `${div.textContent.trim()}` : "No Twitter post found.";
             }
             // Handle NBC News case
             else if (hostName === "www.nbcnews.com") {

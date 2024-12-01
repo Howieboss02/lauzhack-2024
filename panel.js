@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let fakeCoeff = false;
 
-/*
     setTimeout(() => {
         const fakeValue = fetch('http://127.0.0.1:5000/send_text', {
             method: 'POST',
@@ -41,34 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Response from Flask:', data);
+                // data should be a json object which has fake_coefficient as one of the fiels
+                fakeCoeff = data['fake_coefficient'];
+                console.log(fakeCoeff);
             })
             .catch(error => console.error('Error:', error));
 
         console.log("Div content extraction request sent.");
-    }, 3000); // 3000 milliseconds = 3 seconds
-*/
+    }, 1000); // 
 
-    setTimeout(async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:5000/send_text', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text: articleContent }),
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json(); // Await JSON parsing
-            console.log('JSON data received:', data);
-            // Use the `data` object here
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }, 3000);
 
     //
     // const sentimentValue = fetch('http://127.0.0.1:5000/sent_sentiment', {
@@ -143,12 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-        let newsValue = true;
-        if (newsValue) {
+        if (fakeCoeff == 0) {
             messageContainer.textContent = "Great! You are right!";
             messageContainer.style.color = "#28a745"; // Green for success
         } else {
-            messageContainer.textContent = "Take under consideration that not everything you see is true.";
+            messageContainer.textContent = "Take into consideration that not everything you see is true.";
             messageContainer.style.color = "#dc3545"; // Red for warning
         }
         
@@ -190,11 +169,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const sentimentText = document.getElementById("sentimentText");
 
 
-        if (newsValue) {
+        if (fakeCoeff == 1) {
             messageContainer.textContent = "Great! You are right!";
             messageContainer.style.color = "#28a745"; // Green for success
         } else {
-            messageContainer.textContent = "Take under consideration that not everything you see is true.";
+            messageContainer.textContent = "Take into consideration that not everything you see is true.";
             messageContainer.style.color = "#dc3545"; // Red for warning
         }
 
